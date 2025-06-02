@@ -1,0 +1,639 @@
+/* Grundlayout */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #F3EBDD;
+  color: #000000;
+  line-height: 1.6;
+}
+
+h2{
+  color: #003366;
+}
+
+/* Kopfzeile */
+#kopfzeile {
+  background-color: #003366;
+  width: 100%;
+}
+
+.kopf-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 80px;
+  position: relative;
+}
+
+/* Header Logo */
+.logo-link img.logo {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+/* Navigation */
+#navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 28px;
+}
+
+.nav-link {
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 10px 15px;
+  position: relative;
+  font-size: 1.1em;
+}
+
+/* Hover/Animation bei Navigationslinks */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  width: 0;
+  height: 2px;
+  background-color: #A0C4E3;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Burger-Menü für kleinere Bildschirme (max 768px) */
+/* animiert das Burger-Menü zu einem Kreuz beim Öffnen */
+#burger-toggle {
+  display: none;
+}
+
+.burger-label {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 5px;
+  width: 36px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.burger-linie {
+  height: 3px;
+  width: 100%;
+  background-color: #FFFFFF;
+  transition: all 0.3s ease;
+}
+
+#burger-toggle:checked + .burger-label .burger-linie:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+#burger-toggle:checked + .burger-label .burger-linie:nth-child(2) {
+  opacity: 0;
+}
+
+#burger-toggle:checked + .burger-label .burger-linie:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Navigation aufklappen bei kleineren Bildschirmen. Zahl 768 wurde aus dem Internet empfohlen. */
+/* aktiviert Navigation  bei Klick aufs Burger-Menü */
+@media (max-width: 768px) {
+  .burger-label {
+    display: flex;
+    position: absolute;
+    right: 20px;
+    top: 22px;
+  }
+
+  #navigation ul {
+    display: none;
+    flex-direction: column;
+    background-color: #003366;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    z-index: 1000;
+  }
+
+  #burger-toggle:checked + .burger-label + #navigation ul {
+    display: flex;
+  }
+}
+
+/* Seitenitel */
+.einleitung {
+  text-align: center;
+  padding: 48px 24px 16px;
+  background-color: #F3EBDD;
+}
+
+.haupttitel {
+  font-size: 3.2em;
+  font-family: 'Times New Roman Bold', serif;
+  color: #003366;
+  margin: 0;
+}
+
+.trennlinie {
+  margin-top: 12px;
+  width: 180px;
+  height: auto;
+}
+
+/* Galerie */
+#galerie {
+  background-color: #F3EBDD;
+  padding: 64px 24px 96px;
+}
+
+.Fotobereich {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Rastert Kärtchen in 2 pro Zeile */
+.kartenraster {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+/* einspaltig bei Kleineren Bildschirmen */
+@media (max-width: 768px) {
+  .kartenraster {
+    grid-template-columns: 1fr;
+  }
+}
+
+.auto-karte {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s ease;
+}
+
+.auto-karte:hover {
+  transform: scale(1.02);
+}
+
+/* Bilder in Galerie-Karten */
+.kartenbild {
+  width: 100%;
+  display: block;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Blauer Overlay bei Hover auf Karte */
+/* zeigt Info beim Darüberfahren */
+.karten-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(160, 196, 227, 0.95); 
+  /* mit rgb wegen transparenz */
+  color: #000000;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+/* Damit .karten-overlay sichtbar wird */
+.auto-karte:hover .karten-overlay {
+  opacity: 1;
+}
+
+.karten-text {
+  padding: 20px;
+}
+
+.karten-titel {
+  font-size: 1.3em;
+  font-family: 'Times New Roman Bold', serif;
+  margin-bottom: 8px;
+}
+
+/* Footer */
+#fusszeile {
+  background-color: #003366;
+  color: #FFFFFF;
+  width: 100%;
+  padding: 48px 24px;
+}
+
+.fuss-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+/* Anordnung der Elemente im Footer */
+.fuss-info,
+.fuss-trenner,
+.fuss-logo {
+  flex: 1 1 280px;
+  max-width: 300px;
+}
+
+.fuss-logo img {
+  max-width: 160px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.fuss-trenner img {
+  max-height: 100px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.fuss-link {
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+/* Damit Abtrennungstrich bei kleineren Devisen um 90 Grad gedreht wird */
+@media (max-width: 768px) {
+  .fuss-trenner img {
+    transform: rotate(90deg);
+    height: auto;
+  }
+}
+
+/* Hover von Navigation des Footers */
+.fuss-link:hover {
+  color: #A0C4E3;
+}
+
+/* Lernjournal */
+#lernjournal {
+  padding: 64px 24px;
+  background-color: #F3EBDD;
+}
+
+.lernjournal-rahmen {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Kärtchen bei Lernjournal */
+.lernjournal-rahmen article {
+  background: #FFFFFF;
+  border-left: 6px solid #003366;
+  padding: 32px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+/* Bei Hover verschiebts die ärtchen damit 4 Pixel nach oben */
+.lernjournal-rahmen article:hover {
+  transform: translateY(-4px);
+}
+
+/* Lampen-Icon in Listenpunkten */
+.lernjournal-rahmen ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 1.5em;
+}
+
+.lernjournal-rahmen ul li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+}
+
+.lernjournal-rahmen ul li::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  background-image: url("bilder/Gestaltungselement/lampe.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Datum im Lernjournal */
+.lernjournal-rahmen article strong {
+  display: block;
+  font-size: 1.4em;
+  margin-bottom: 12px;
+  color: #003366;
+  font-weight: bold;
+}
+
+/* Bildvergleich nebeneinander (im Lenrjournal)*/
+.bildvergleich {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  margin: 40px 0;
+}
+
+.bildvergleich > div {
+  text-align: center;
+  max-width: 400px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 300px;
+}
+
+.bildvergleich img {
+  width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+.bildvergleich-unterschrift {
+  margin-top: 8px;
+  font-style: italic;
+  font-size: 0.95em;
+  color: #333333;
+}
+
+/* Perspektivenbild */
+.perspektive-box {
+  margin: 40px auto;
+  max-width: 800px;
+}
+
+.perspektive-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+/* Konzeptseite Text */
+.textcontainer {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 1.05em;
+  line-height: 1.8;
+  padding: 64px 24px;
+  background-color: #F3EBDD;
+}
+
+.abschnittstitel {
+  font-family: 'Times New Roman Bold', serif;
+  color: #003366;
+  font-size: 1.6em;
+  margin-top: 40px;
+  margin-bottom: 12px;
+}
+
+.textcontainer p {
+  margin-bottom: 24px;
+}
+
+/* Moodboard */
+.moodboard-bereich {
+  background-color: #F3EBDD;
+  text-align: center;
+  padding: 48px 24px 80px;
+}
+
+.moodboard-titel {
+  font-size: 2em;
+  font-family: 'Times New Roman Bold', serif;
+  color: #003366;
+  margin-bottom: 24px;
+}
+
+.moodboard-bild {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+/* Footer Navigation */
+.footer-navi {
+  margin-top: 48px;
+  text-align: center;
+  font-size: 0.95em;
+}
+
+.footer-navi a {
+  color: #FFFFFF;
+  text-decoration: none;
+  margin: 0 12px;
+  transition: color 0.3s ease;
+}
+
+.footer-navi a:hover {
+  color: #A0C4E3;
+}
+
+
+/* Zweispaltiger Bereich für ,,Über mich" */
+.ueber-mich-zweispaltig {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 3rem;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Bild Mason neben Text */
+.mason-bild {
+  width: 240px;
+  max-height: 364px;
+  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+/* Text daneben */
+.ueber-mich-zweispaltig p {
+  max-width: 600px;
+  font-size: 1.05em;
+  text-align: left;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* Special Thanks To Karte in der About Seite */
+.special-thanks-rechts {
+  background-color: #708090;
+  border-left: 6px solid #003366;
+  color: white;
+  padding: 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.special-thanks-rechts .abschnittstitel {
+  color: white;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.special-thanks-rechts img {
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Ansicht von kleineren Screens about */
+@media (max-width: 768px) {
+  .ueber-mich-zweispaltig {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ueber-mich-zweispaltig p {
+    text-align: left;
+  }
+
+  .mason-bild {
+    width: 80%;
+    height: auto;
+  }
+}
+
+/* Grossvater-Bild */
+.grossvater-gross {
+  display: block;
+  margin: 0 auto;
+  width: 500px;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Links*/
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #A0C4E3;
+  text-decoration: none;
+}
+
+/* Download RAW Button */
+.button-link {
+  background-color: #003366;
+  color: #A0C4E3;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 24px auto 0;
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  text-align: center;
+  display: block;
+  width: fit-content;
+}
+
+.button-link:hover {
+  background-color: #2a7db1;
+  color: #ffffff;
+}
+
+/* Zeitplan-Seite */
+.zeitplan-bildbereich {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+  background-color: #F3EBDD;
+}
+
+.zeitplanbild {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.einleitungstext {
+  text-align: center;
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 1.5rem auto 0 auto;
+  color: #333;
+  line-height: 1.6;
+}
+
+.textabschnitt {
+  margin-bottom: 3rem;
+}
+
+.textabschnitt ul {
+  padding-left: 1.5rem;
+  list-style-type: disc;
+}
+
+.textabschnitt a {
+  color: #2a7db1;
+  text-decoration: none;
+}
+
+.textabschnitt a:hover {
+  text-decoration: underline;
+}
+
+/* Pecha Kucha Video */
+.video-player {
+  width: 90%;
+  max-width: 960px;
+  margin: 2rem auto 2rem auto; 
+  display: block;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border: none;
+}
+
